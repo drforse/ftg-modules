@@ -21,12 +21,10 @@ class ExpiringMediaMod(loader.Module):
         sender_s = (f'{m.sender.first_name or ""} {m.sender.last_name or ""} '
                     f'{m.sender.username or ""} ({m.sender_id})')
         bytesio = io.BytesIO()
-        logging.info('downloading...')
         await m.download_media(bytesio)
-        logging.info('downloaded')
         bytesio.seek(0)
         await self.client.send_file(
-            'me', file=bytesio, message=f'Expiring photo from: {sender_s}', force_document=False,
+            'me', file=bytesio, caption=f'Expiring photo from: {sender_s}',
             parse_mode='HTML', attributes=[DocumentAttributeFilename(m.file.name)])
         bytesio.close()
 
