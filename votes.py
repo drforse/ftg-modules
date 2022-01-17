@@ -61,7 +61,7 @@ class VotesMod(loader.Module):
             user = await client.get_entity(entity=int(u))
             text += f'<b>{user.first_name}({len(votes[u])})</b>:\n'
             for vote in votes[u]:
-                voted = await client.get_entity(entity=int(vote))
+                voted = await client.get_entity(entity=vote)
                 text += f'ᅠ{voted.first_name}\n'
             text += '• ' * 25 + '\n'
         text += f'\nАнонимные голоса: {anonimous}\n\nP.S.: если есть анонимные голоса, то количество голосов неточное.' \
